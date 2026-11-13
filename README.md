@@ -1,17 +1,36 @@
 # Pixoo Wiener Linien
 
 Zeigt die Echtzeit-Abfahrten der Wiener Linien auf einem **Divoom Pixoo 16x16** an.
-Ein ESP32 holt die Daten per WLAN und schickt die Bilder per Bluetooth Classic an die Pixoo.
+Ein ESP32 holt die Daten per WLAN und schickt die Bilder per Bluetooth Classic an den Pixoo.
+
+Ich wollte immer schon das **Divoom Pixoo 16x16 Display** als Anzeige für andere Daten benutzen als jene welche durch die Hersteller App vorgegeben sind. Das Display soll auch Daten anzeigen wenn der PC (der die Bluetooth-Verbindung zum Display herstellt) gerade mal nicht läuft. Inspiriert durch dieses Projekt: https://github.com/coppermilk/wiener_linien_esp32_monitor wollte ich das mal selber versuchen.
+
+Da nur maximal 2 Zeilen/Seite vernünftig angezeigt werden können, kann man nur Echtzeitdaten pro Linie und Station und Richtung anzeigen lassen. Es werden keine Stationsnamen des Ziels angezeigt, da diese dann Scrollen müssten was dann zu lange dauert.
+
+Echtzeitdaten werden alle 30 Sekunden neu abgefragt.
+
+Es gibt noch Potential für Verbesserungen:
+- Die Bluetooth-Verbindung muss kurzfristig aus und wieder eingeschaltet werden damit genug Speicher für die Echtzeitdatenabfrage vorhanden ist. Eventuell kann das anders gelöst werden.
+- Die Echtzeitdaten beinhalten auch die Störungsnachrichten welche aber nicht verwendet werden. Hier könnte man eine gestörte Abfahrt mit einer anderen Farbe hinterlegen oder auch Störungsnachrichten am Display anzeigen. Aufgrund der 16*16 Pixel gibt es hier aber nicht viel Spielraum.
+- Will man das Display einrichten (Linien hinzufügen oder Parameter anpassen), muss der Code verändert, kompiliert und hochgeladen werden. Hier wäre eine Einrichtung über das Handy per W-Lan eine gute Option.
+
+Erstellt wurde das Projekt mit Claude (gratis Version) als Vibe-Coding Projekt, die Prompts stammen von mir :-)
+
+Forks sind erwünscht, bin gespannt ob es Verbesserungen oder Weiterentwicklungen gibt.
+
+<img width="300" height="400" alt="PXL_20261113_124121436" src="https://github.com/user-attachments/assets/058715c2-6e07-4d14-83e0-3b18dce91e07" /> <img width="300" height="400" alt="PXL_20261113_124726999" src="https://github.com/user-attachments/assets/229efc72-cad8-4af7-9515-37ef41b32cf8" />
+
+
 
 ## Anzeige
 
 - Zwei Zeilen: links die Linie, rechts die Minuten bis zur Abfahrt. Die beiden Zeilen zeigen die **nächsten zwei Abfahrten derselben Linie**.
 - Eine Seite entspricht einer Linie in einer Richtung (Linienname + `richtungsId`). Verschiedene Fahrtziele derselben Richtung werden zusammengefasst. Bei mehreren Linien wechselt die Seite alle 5 Sekunden.
 - Bei **0 Minuten** erscheint statt der "0" ein Quadrat, das im Sekundentakt zwischen rechts oben und links unten springt.
-- Bei **U-Bahnen mit Klapprampe** (`vehicle.type` = `ptMetro`, `foldingRamp` = `true`) steht hinter dem Liniennamen ein Unterstrich, bis einschließlich Minute 19.
+- Bei **U-Bahnen mit Rampe** (`vehicle.type` = `ptMetro`, `foldingRamp` = `true`) steht hinter dem Liniennamen ein Unterstrich, bis einschließlich Minute 19.
 - Gibt es keine Abfahrten, steht **NO DATA** auf dem Display.
 - **Nachtmodus:** Gibt es im Nachtfenster (Standard 0:00 bis 4:30 Uhr) keine Abfahrten, geht die Anzeige aus, und ein einzelner Pixel links unten pulsiert langsam. Im Nachtmodus wird nicht abgefragt. Nach dem Ende des Fensters wird wieder abgefragt, und vorhandene Daten werden angezeigt. Außerhalb des Fensters bleibt NO DATA stehen.
-- Die Schrift ist 3x5 Pixel groß und kennt Großbuchstaben, Ziffern, Leerzeichen, `-` und `_`. Zu lange Liniennamen werden gekürzt, wenn sonst kein Platz neben den Minuten bleibt (z. B. wird `13A` neben zweistelligen Minuten zu `13`).
+- Die Schrift ist 3x5 Pixel groß und kennt Großbuchstaben, Ziffern, Leerzeichen, `-` und `_`. Zu lange Liniennamen werden gekürzt, wenn sonst kein Platz neben den Minuten bleibt (z. B. wird `13A` neben zweistelligen Minuten zu `13`). 4-Stellige Liniennamen wurden nicht getestet.
 
 ## Hardware
 
@@ -21,12 +40,12 @@ Ein ESP32 holt die Daten per WLAN und schickt die Bilder per Bluetooth Classic a
 
 ## Einrichtung
 
-1. Arduino IDE installieren und im Boardverwalter das Paket **esp32** (Espressif Systems) installieren.
+1. Arduino IDE installieren und im Boardverwalter das Paket **esp32** (Espressif Systems) installieren. In den Einstellungen unter "Zusätzliche Boardverwalter-URL's:" https://espressif.github.io/arduino-esp32/package_esp32_index.json eingeben.
 2. Bibliothek **ArduinoJson** von Benoit Blanchon installieren (Version 6.x, entwickelt mit 6.21.x).
 3. Unter *Werkzeuge* einstellen:
    - Board: **ESP32 Dev Module**
    - Partition Scheme: **Huge APP (3MB No OTA/1MB SPIFFS)**
-4. Im Sketch-Ordner `Pixoo_Wiener_Linien` die Datei `secrets.example.h` kopieren, als `secrets.h` speichern und WLAN-Namen und Passwort eintragen. Die Datei `secrets.h` steht in `.gitignore` und wird nicht hochgeladen.
+4. Im Sketch-Ordner `Pixoo_Wiener_Linien` die Datei `secrets.example.h` kopieren, als `secrets.h` speichern und WLAN-Namen und Passwort eintragen.
 5. Oben in `Pixoo_Wiener_Linien.ino` die RBL-Nummern der Haltestellen eintragen. Passende Nummern findest du auf https://till.mabe.at/rbl/. Mehrere RBLs werden mit Komma getrennt, z. B. `"567,4932"`.
 6. Die Pixoo einschalten und vom Handy trennen (Bluetooth am Handy ausschalten), damit die Verbindung nicht belegt ist. Sie muss unter dem Namen **Pixoo** gefunden werden.
 7. Sketch hochladen und im Serial Monitor (115200 Baud) den Ablauf beobachten.
@@ -58,9 +77,9 @@ Alle Einstellungen stehen oben in `Pixoo_Wiener_Linien.ino`:
 
 ## Einschränkungen
 
-- Nur mit der Pixoo 16x16 und dem ESP32-DevKitC V4 getestet.
+- Nur mit dem Pixoo 16x16 und dem ESP32-DevKitC V4 getestet.
 - Die WLAN-Zugangsdaten stehen in `secrets.h`. Es gibt kein WLAN-Konfigurationsportal.
-- Während jedes Datenabrufs wird die Bluetooth-Verbindung kurz getrennt.
+- Während jedes Datenabrufs wird die Bluetooth-Verbindung kurz getrennt und danach wieder verbunden. Leider erscheint dann kurz das Bluetooth-Symbol am Display.
 - Im Nachtmodus wird nicht abgefragt. Fährt in dieser Zeit doch etwas, erscheint es erst nach dem Ende des Nachtfensters.
 
 ## Datenquelle und Hinweis
