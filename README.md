@@ -13,10 +13,11 @@ Es gibt noch Potential für Verbesserungen:
 - Die Bluetooth-Verbindung muss kurzfristig aus und wieder eingeschaltet werden damit genug Speicher für die Echtzeitdatenabfrage vorhanden ist. Eventuell kann das anders gelöst werden.
 - Die Echtzeitdaten beinhalten auch die Störungsnachrichten welche aber nicht verwendet werden. Hier könnte man eine gestörte Abfahrt mit einer anderen Farbe hinterlegen oder auch Störungsnachrichten am Display anzeigen. Aufgrund der 16*16 Pixel gibt es hier aber nicht viel Spielraum.
 - Will man das Display einrichten (Linien hinzufügen oder Parameter anpassen), muss der Code verändert, kompiliert und hochgeladen werden. Hier wäre eine Einrichtung über das Handy per W-Lan eine gute Option.
+- Erweiterung für andere Städte in Ö oder D.
 
 Erstellt wurde das Projekt mit Claude (gratis Version) als Vibe-Coding Projekt, die Prompts stammen von mir :-)
 
-Forks sind erwünscht, bin gespannt ob es Verbesserungen oder Weiterentwicklungen gibt.
+Forks sind erwünscht, bin gespannt ob es Verbesserungen oder Weiterentwicklungen gibt. Auch eine Portierung auf ein **Pixoo 64*64 Display** hat durchaus Potential.
 
 <img width="300" height="400" alt="PXL_20261113_124121436" src="https://github.com/user-attachments/assets/058715c2-6e07-4d14-83e0-3b18dce91e07" /> <img width="300" height="400" alt="PXL_20261113_124726999" src="https://github.com/user-attachments/assets/229efc72-cad8-4af7-9515-37ef41b32cf8" />
 
