@@ -66,7 +66,7 @@ Alle Einstellungen stehen oben in `Pixoo_Wiener_Linien.ino`:
 | `REFRESH_MS` | Abstand der Datenabrufe (Standard 30 s) |
 | `REBOOT_MS` | Neustart nach dieser Zeit, `0` = aus (Standard 3 Stunden) |
 | `COLOR` | Farbe der Schrift (R, G, B) |
-| `RAMP_MAX_MINUTES` | Rampen-Unterstrich bis einschließlich dieser Minute |
+| `RAMP_MAX_MINUTES` | Rampen-Unterstrich bis einschließlich dieser Minute (Standard 19 Minuten) |
 | `NIGHT_START_*`, `NIGHT_END_*` | Beginn und Ende des Nachtfensters (Standard 0:00 bis 4:30) |
 | `TIME_ZONE` | Zeitzone für die Uhrzeit aus dem Internet (Standard: Wien) |
 | `PULSE_PERIOD_MS`, `PULSE_MIN_PERCENT`, `PULSE_MAX_PERCENT` | Dauer und Helligkeit des pulsierenden Pixels |
