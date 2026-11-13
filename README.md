@@ -20,6 +20,9 @@ Forks sind erwünscht, bin gespannt ob es Verbesserungen oder Weiterentwicklunge
 
 <img width="300" height="400" alt="PXL_20261113_124121436" src="https://github.com/user-attachments/assets/058715c2-6e07-4d14-83e0-3b18dce91e07" /> <img width="300" height="400" alt="PXL_20261113_124726999" src="https://github.com/user-attachments/assets/229efc72-cad8-4af7-9515-37ef41b32cf8" />
 
+Der ESP32:
+
+<img width="389" height="291" alt="PXL_20261113_162735534 MACRO_FOCUS~2" src="https://github.com/user-attachments/assets/f91da6f9-0566-496d-85ae-eeb6cc13a9b5" />
 
 
 ## Anzeige
