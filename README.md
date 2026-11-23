@@ -40,7 +40,7 @@ Der ESP32:
 
 - **Divoom Pixoo 16x16** (Bluetooth Classic). Getestet nur mit diesem Modell.
 - **ESP32 mit Bluetooth Classic**, z. B. ESP32-DevKitC V4 mit ESP32-WROOM-32.
-- Nicht geeignet: ESP32-S2, -S3 und -C3 (kein Bluetooth Classic) sowie der Arduino Uno R4 WiFi (nur BLE). Die Pixoo 16x16 reagierte darüber bei den Tests nicht auf Steuerbefehle.
+- Nicht geeignet: ESP32-S2, -S3 und -C3 (kein Bluetooth Classic) sowie der Arduino Uno R4 WiFi (nur BLE). Der Pixoo 16x16 reagierte darüber bei den Tests nicht auf Steuerbefehle.
 
 ## Einrichtung
 
@@ -50,13 +50,13 @@ Der ESP32:
    - Board: **ESP32 Dev Module**
    - Partition Scheme: **Huge APP (3MB No OTA/1MB SPIFFS)**
 4. Im Sketch-Ordner `Pixoo_Wiener_Linien` die Datei `secrets.example.h` kopieren, als `secrets.h` speichern und WLAN-Namen und Passwort eintragen.
-5. Oben in `Pixoo_Wiener_Linien.ino` die RBL-Nummern der Haltestellen eintragen. Passende Nummern findest du auf https://till.mabe.at/rbl/. Mehrere RBLs werden mit Komma getrennt, z. B. `"567,4932"`.
+5. Oben in `Pixoo_Wiener_Linien.h` die RBL-Nummern der Haltestellen eintragen. Passende Nummern findest du auf https://till.mabe.at/rbl/. Mehrere RBLs werden mit Komma getrennt, z. B. `"567,4932"`.
 6. Die Pixoo einschalten und vom Handy trennen (Bluetooth am Handy ausschalten), damit die Verbindung nicht belegt ist. Sie muss unter dem Namen **Pixoo** gefunden werden.
 7. Sketch hochladen und im Serial Monitor (115200 Baud) den Ablauf beobachten.
 
 ## Einstellungen
 
-Alle Einstellungen stehen oben in `Pixoo_Wiener_Linien.ino`:
+Alle Einstellungen stehen oben in `Pixoo_Wiener_Linien.h`:
 
 | Einstellung | Bedeutung |
 |---|---|
